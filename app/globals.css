@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ──────────────────────────────────────── */
+:root {
+  --lens-paper: #F0EDEB;
+  --lens-ink: #1A1A1A;
+  --lens-red: #D64933;
+  --lens-grey: #6B6B6B;
+  --lens-light: #E8E4E0;
+  --lens-green: #2D6A4F;
+}
+
+/* ─── Base Styles ────────────────────────────────────────── */
+body {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  background-color: var(--lens-paper);
+  color: var(--lens-ink);
+}
+
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Smooth Scroll & Selection ──────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--lens-red);
+  color: white;
+}
+
+/* ─── Scrollbar — Brutalist ──────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--lens-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--lens-ink);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lens-red);
+}
+
+/* ─── Score Bars ─────────────────────────────────────────── */
+.score-bar {
+  height: 12px;
+  background: var(--lens-light);
+  position: relative;
+}
+
+.score-bar-fill {
+  height: 100%;
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Gatekeeper Badges ──────────────────────────────────── */
+.gk-pass {
+  background: var(--lens-ink);
+  color: white;
+}
+
+.gk-fail {
+  background: var(--lens-red);
+  color: white;
+}
+
+.gk-na {
+  background: var(--lens-light);
+  color: var(--lens-grey);
+  border: 2px solid var(--lens-grey);
+}
+
+/* ─── Classification Badges ──────────────────────────────── */
+.badge-exemplar {
+  background: var(--lens-ink);
+  color: white;
+  border: 3px solid var(--lens-ink);
+}
+
+.badge-strong {
+  background: var(--lens-green);
+  color: white;
+  border: 3px solid var(--lens-green);
+}
+
+.badge-adequate {
+  background: transparent;
+  color: var(--lens-grey);
+  border: 3px solid var(--lens-grey);
+}
+
+.badge-weak {
+  background: var(--lens-red);
+  color: white;
+  border: 3px solid var(--lens-red);
+}
+
+/* ─── Loading Animation — Brutalist Bars ─────────────────── */
+@keyframes block-pulse {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.3); }
+}
+
+.loading-bar {
+  display: inline-block;
+  width: 8px;
+  height: 40px;
+  background: var(--lens-ink);
+  margin: 0 3px;
+  animation: block-pulse 1s ease-in-out infinite;
+}
+
+.loading-bar:nth-child(2) { animation-delay: 0.1s; }
+.loading-bar:nth-child(3) { animation-delay: 0.2s; }
+.loading-bar:nth-child(4) { animation-delay: 0.3s; }
+.loading-bar:nth-child(5) { animation-delay: 0.4s; }
+.loading-bar:nth-child(6) { animation-delay: 0.5s; }
+
+/* ─── Step Progress Indicator ────────────────────────────── */
+@keyframes step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-enter {
+  animation: step-enter 0.4s ease-out forwards;
+}
+
+/* ─── Fade In ────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Stagger delays for children */
+.stagger-1 { animation-delay: 0.1s; opacity: 0; }
+.stagger-2 { animation-delay: 0.2s; opacity: 0; }
+.stagger-3 { animation-delay: 0.3s; opacity: 0; }
+.stagger-4 { animation-delay: 0.4s; opacity: 0; }
+
+/* ─── Tooltip ────────────────────────────────────────────── */
+.tooltip-trigger:hover .tooltip-content {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.tooltip-content {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+/* ─── Focus Styles — Brutalist ───────────────────────────── */
+input:focus, select:focus, textarea:focus {
+  outline: 3px solid var(--lens-red);
+  outline-offset: 0;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--lens-red);
+  outline-offset: 2px;
+}
+
+/* ─── Print / PDF Styles ─────────────────────────────────── */
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break {
+    page-break-before: always;
+  }
+}
+
+/* ─── Skip to Content (Accessibility) ────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--lens-red);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ─── Copied Toast ───────────────────────────────────────── */
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.95);
+  }
+}
+
+.toast-enter {
+  animation: toast-enter 0.25s ease-out forwards;
+}
+
+.toast-exit {
+  animation: toast-exit 0.2s ease-in forwards;
+}
