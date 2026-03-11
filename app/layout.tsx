@@ -14,15 +14,18 @@ const spaceGrotesk = Space_Grotesk({
 
 // ─── Metadata ─────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: '6D Lens | EdTech Evaluation Framework',
+  title: 'The 6D Lens | Evaluating EdTech for Instructional Design & Pedagogy',
   description:
-    'Research-backed EdTech evaluation using the 6 Dimensions of Intention & Integrity in Learning Design. Built on Hattie, Marzano, UDL, TPACK, and ESSA evidence tiers.',
+    'A structured, research-grounded framework for evaluating educational technology across six dimensions of instructional design, pedagogy, equity, and student safety. Built on Hattie, Marzano, UDL, TPACK, and ESSA evidence tiers.',
   keywords: [
     'edtech evaluation',
     'education technology',
+    'instructional design',
+    'pedagogy',
     '6D framework',
     'learning design',
-    'pedagogical vault',
+    'student safety',
+    'equity in edtech',
     'UDL',
     'TPACK',
     'SAMR',
@@ -36,24 +39,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: '6D Lens | Does Your EdTech Tool Put Learning First?',
+    title: 'The 6D Lens | Evaluating EdTech for Instructional Design & Pedagogy',
     description:
-      'Research-backed EdTech evaluation using the 6 Dimensions of Intention & Integrity in Learning Design. No marketing hype. Just honest analysis.',
-    siteName: '6D Lens',
+      'A structured, research-grounded framework for evaluating educational technology. Six dimensions. Four gatekeepers. Evidence-capped scoring.',
+    siteName: 'The 6D Lens',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: '6D Lens — EdTech Evaluation Framework',
+        alt: 'The 6D Lens: Evaluating EdTech for Instructional Design and Pedagogy',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '6D Lens | Does Your EdTech Tool Put Learning First?',
+    title: 'The 6D Lens | Evaluating EdTech for Instructional Design & Pedagogy',
     description:
-      'Research-backed EdTech evaluation framework grounded in learning science.',
+      'A structured evaluation framework grounded in learning science, prioritizing equity, student safety, and evidence-based instructional design.',
     images: ['/og-image.png'],
   },
   robots: {

@@ -42,7 +42,7 @@ Built by [Amy Henderson](https://github.com/amyhenderson), National Board Certif
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/6d-lens.git
+git clone <your-repo-url>
 cd 6d-lens
 
 # Install dependencies

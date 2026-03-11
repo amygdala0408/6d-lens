@@ -267,12 +267,12 @@ export interface EvaluationResult {
 
 export type ToolCategory =
   | 'Learning Experience Designers'
-  | 'Assessment & Feedback Innovators'
-  | 'Learning Analytics & Data Insights'
+  | 'Assessment and Feedback Innovators'
+  | 'Learning Analytics and Data Insights'
   | 'Inclusive Learning Aids'
   | 'Multilingual Learning Allies'
   | 'Educator Copilots'
-  | 'AI Tutors & Student Mentors';
+  | 'AI Tutors and Student Mentors';
 
 // Hub-compatible JSON format for Vercel curation site
 export interface HubToolData {

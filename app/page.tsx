@@ -21,19 +21,19 @@ const EVALUATION_STEPS = [
 // ─── Category Descriptions ────────────────────────────────
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   'Learning Experience Designers':
-    'Tools that help plan, design, and deliver lessons and curriculum. Think Nearpod, Eduaide.AI, Canva for Education — platforms where the learning experience is constructed.',
+    'Tools that help plan, design, and deliver lessons and curriculum, such as Nearpod, Eduaide.AI, and Canva for Education.',
   'Assessment and Feedback Innovators':
-    'Tools that transform how we grade, quiz, and give feedback. From plagiarism detection to AI-powered grading — Turnitin, Gradescope, Formative, and their peers.',
+    'Tools focused on grading, quizzing, and providing feedback, including platforms like Turnitin, Gradescope, and Formative.',
   'Learning Analytics and Data Insights':
-    'Tools that track student progress and visualize performance data. The dashboards and data engines that inform instructional decisions — PowerSchool, Otus, and others.',
+    'Tools that track student progress and visualize performance data to inform instructional decisions, such as PowerSchool and Otus.',
   'Inclusive Learning Aids':
-    'Tools built for accessibility, accommodations, and special education. Designed to remove barriers — Texthelp, Bookshare, and platforms centering disability justice.',
+    'Tools designed for accessibility, accommodations, and special education, including Texthelp, Bookshare, and platforms centering disability justice.',
   'Multilingual Learning Allies':
-    'Tools that support translation, language learning, and multilingual classrooms. Serving students whose linguistic diversity is an asset, not a problem.',
+    'Tools that support translation, language learning, and multilingual classrooms, serving students whose linguistic diversity is an asset.',
   'Educator Copilots':
-    'AI-powered tools for teacher productivity, planning, and admin. The co-pilots that handle the busywork so teachers can focus on teaching — MagicSchool, Brisk Teaching.',
+    'Tools for teacher productivity, planning, and administration that support educators in focusing their time on instruction, such as MagicSchool and Brisk Teaching.',
   'AI Tutors and Student Mentors':
-    'AI-powered instructional tools that work directly with students. From Khanmigo to Cognii — the tools that sit in the student seat.',
+    'AI-powered instructional tools that work directly with students, such as Khanmigo and Cognii.',
 };
 
 // ─── Session Cache Helpers ────────────────────────────────
@@ -301,7 +301,7 @@ export default function Home() {
           </div>
 
           <p className="text-xs text-lens-grey mt-4">
-            {elapsed}s elapsed &mdash; typically takes 15&ndash;30 seconds
+            {elapsed}s elapsed. Typically takes 15 to 30 seconds.
           </p>
         </div>
       </div>
@@ -320,25 +320,72 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <header className="border-b-3 border-lens-ink">
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
-          <div className="flex items-baseline gap-4 mb-8 fade-in-up">
-            <span className="font-display text-6xl md:text-8xl tracking-tight">6D LENS</span>
+        <div className="max-w-5xl mx-auto px-6 py-10 md:py-16">
+          <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-12">
+
+            {/* Left column: branding + headline */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-4 mb-5 fade-in-up">
+                <div className="w-14 h-14 md:w-16 md:h-16 bg-lens-ink flex items-center justify-center flex-shrink-0">
+                  <span className="font-display text-3xl md:text-4xl text-lens-red leading-none">6D</span>
+                </div>
+                <div className="border-l-3 border-lens-red pl-4">
+                  <span className="font-display text-4xl md:text-5xl tracking-tight leading-none">THE 6D LENS</span>
+                  <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-lens-grey mt-0.5">
+                    Evaluating EdTech for Instructional Design &amp; Pedagogy
+                  </div>
+                </div>
+              </div>
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight fade-in-up stagger-1">
+                IS YOUR EDTECH GROUNDED IN{' '}
+                <span className="text-lens-red">RESEARCH AND BEST PRACTICE?</span>
+              </h1>
+              <p className="mt-4 text-base text-lens-grey max-w-xl leading-relaxed fade-in-up stagger-2">
+                A structured evaluation framework grounded in decades of learning science, including
+                Hattie, Marzano, UDL, and TPACK. We prioritize equity, student safety, and
+                evidence-based instructional design across six weighted dimensions.
+              </p>
+              <a
+                href="#evaluate"
+                className="inline-block mt-6 px-8 py-4 bg-lens-ink text-white font-display text-2xl tracking-wider hover:bg-lens-red transition-colors fade-in-up stagger-3"
+              >
+                EVALUATE A TOOL &darr;
+              </a>
+            </div>
+
+            {/* Right column: dimension badge grid */}
+            <div className="hidden md:flex flex-col justify-center fade-in-up stagger-2">
+              <div className="grid grid-cols-2 gap-2 w-56">
+                {[
+                  { tag: 'LDI', label: 'Learning Design', weight: '25%' },
+                  { tag: 'EFF', label: 'Efficacy', weight: '20%' },
+                  { tag: 'F&A', label: 'Feedback', weight: '15%' },
+                  { tag: 'EQU', label: 'Equity', weight: '15%' },
+                  { tag: 'T&E', label: 'Tech Ethics', weight: '15%' },
+                  { tag: 'INT', label: 'Integration', weight: '10%' },
+                ].map((dim) => (
+                  <div
+                    key={dim.tag}
+                    className="border-2 border-lens-ink p-2.5 hover:border-lens-red transition-colors group"
+                  >
+                    <div className="font-display text-lg text-lens-red leading-none group-hover:text-lens-ink transition-colors">
+                      {dim.tag}
+                    </div>
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-lens-grey mt-1 leading-tight">
+                      {dim.label}
+                    </div>
+                    <div className="text-[10px] text-lens-grey/60 mt-0.5">{dim.weight}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 text-center">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.15em] text-lens-grey">
+                  6 Dimensions &middot; 4 Gatekeepers &middot; Evidence-Capped
+                </div>
+              </div>
+            </div>
+
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight max-w-3xl fade-in-up stagger-1">
-            DOES YOUR EDTECH TOOL{' '}
-            <span className="text-lens-red">PUT LEARNING FIRST?</span>
-          </h1>
-          <p className="mt-6 text-lg text-lens-grey max-w-2xl leading-relaxed fade-in-up stagger-2">
-            A research-backed evaluation framework built on decades of learning science&mdash;Hattie,
-            Marzano, UDL, TPACK, and more. No marketing hype. Just honest analysis across 6 dimensions
-            of intention &amp; integrity.
-          </p>
-          <a
-            href="#evaluate"
-            className="inline-block mt-8 px-8 py-4 bg-lens-ink text-white font-display text-2xl tracking-wider hover:bg-lens-red transition-colors fade-in-up stagger-3"
-          >
-            EVALUATE A TOOL &darr;
-          </a>
         </div>
       </header>
 
@@ -388,17 +435,18 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="border-l-3 border-lens-red pl-4">
                   <div className="font-display text-2xl">INTENTION</div>
-                  <p className="text-sm text-lens-grey">Was learning the North Star from the start?</p>
+                  <p className="text-sm text-lens-grey">Was learning the central purpose behind every design decision?</p>
                 </div>
                 <div className="border-l-3 border-lens-ink pl-4">
                   <div className="font-display text-2xl">INTEGRITY</div>
-                  <p className="text-sm text-lens-grey">Was it built ethically, accessibly, and responsibly?</p>
+                  <p className="text-sm text-lens-grey">Was it built with equity, student safety, and ethical responsibility at its foundation?</p>
                 </div>
               </div>
               <p className="mt-6 text-sm text-lens-grey leading-relaxed">
                 A tool that passes both tests demonstrates{' '}
-                <strong className="text-lens-ink">pedagogical intentionality</strong>&mdash;evidence
-                that educators and learners were centered in every design decision.
+                <strong className="text-lens-ink">pedagogical intentionality</strong>: evidence
+                that educators and learners were centered in every design decision, supported by
+                research that points toward meaningful student outcomes.
               </p>
             </div>
             <div>
@@ -425,10 +473,18 @@ export default function Home() {
       <section id="evaluate" className="border-b-3 border-lens-ink" aria-label="Evaluate a tool">
         <div className="max-w-5xl mx-auto px-6 py-12">
           <h2 className="font-display text-5xl mb-2">EVALUATE A TOOL</h2>
-          <p className="text-sm text-lens-grey mb-8 max-w-xl">
-            Enter a tool name and we&apos;ll run it through all four gatekeepers and six dimensions.
-            Results generate in 15&ndash;30 seconds.
+          <p className="text-sm text-lens-grey mb-4 max-w-xl">
+            Enter a tool name to receive preliminary evaluation data across all four gatekeepers
+            and six dimensions. Results provide a strong starting point for your own research
+            and due diligence. Typically takes 15 to 30 seconds.
           </p>
+          <div className="border-l-3 border-lens-grey pl-4 py-2 mb-8 max-w-xl">
+            <p className="text-xs text-lens-grey leading-relaxed">
+              <strong className="text-lens-ink">A note for educators:</strong> These evaluations are intended as a
+              starting point for informed decision-making, not a final verdict. We encourage you to verify findings
+              against primary sources and conduct your own research before adopting any tool in your classroom or district.
+            </p>
+          </div>
 
           <form onSubmit={handleEvaluate} className="max-w-2xl" noValidate>
             <div className="space-y-6">
@@ -472,7 +528,7 @@ export default function Home() {
                 <label htmlFor="tool-category" className="block text-sm font-semibold uppercase tracking-widest mb-2">
                   Category{' '}
                   <span className="text-lens-grey font-normal normal-case tracking-normal">
-                    (optional &mdash; auto-detected if blank)
+                    (optional, auto-detected if blank)
                   </span>
                 </label>
                 <select
@@ -594,20 +650,20 @@ export default function Home() {
               <h3 className="font-semibold text-sm uppercase tracking-widest mb-3">Research Foundations</h3>
               <div className="space-y-2 text-sm text-lens-grey leading-relaxed">
                 <p>
-                  <strong className="text-lens-ink">Hattie&apos;s Visible Learning</strong> &mdash;
-                  2,100+ meta-analyses, 300M+ students. Effect size 0.4 threshold.
+                  <strong className="text-lens-ink">Hattie&apos;s Visible Learning:</strong>{' '}
+                  2,100+ meta-analyses encompassing 300M+ students. The 0.4 effect size threshold identifies strategies with meaningful impact.
                 </p>
                 <p>
-                  <strong className="text-lens-ink">Marzano&apos;s High-Yield Strategies</strong> &mdash;
+                  <strong className="text-lens-ink">Marzano&apos;s High-Yield Strategies:</strong>{' '}
                   332 research-based strategies across 43 elements of effective teaching.
                 </p>
                 <p>
-                  <strong className="text-lens-ink">Universal Design for Learning</strong> &mdash;
-                  CAST&apos;s UDL Guidelines 3.0 for inclusive learning design.
+                  <strong className="text-lens-ink">Universal Design for Learning:</strong>{' '}
+                  CAST&apos;s UDL Guidelines 3.0, the standard for inclusive and equitable learning design.
                 </p>
                 <p>
-                  <strong className="text-lens-ink">TPACK Framework</strong> &mdash;
-                  Mishra &amp; Koehler&apos;s integration of content, pedagogy, and technology knowledge.
+                  <strong className="text-lens-ink">TPACK Framework:</strong>{' '}
+                  Mishra &amp; Koehler&apos;s model for meaningful integration of content, pedagogy, and technology knowledge.
                 </p>
               </div>
             </div>
@@ -615,20 +671,20 @@ export default function Home() {
               <h3 className="font-semibold text-sm uppercase tracking-widest mb-3">Evidence Standards</h3>
               <div className="space-y-2 text-sm text-lens-grey leading-relaxed">
                 <p>
-                  <strong className="text-lens-ink">ESSA Evidence Tiers</strong> &mdash;
-                  From logic models (Tier 4) to randomized controlled trials (Tier 1).
+                  <strong className="text-lens-ink">ESSA Evidence Tiers:</strong>{' '}
+                  From logic models (Tier 4) to randomized controlled trials (Tier 1). Tools are held to the standard their evidence supports.
                 </p>
                 <p>
-                  <strong className="text-lens-ink">Evidence Capping</strong> &mdash;
+                  <strong className="text-lens-ink">Evidence Capping:</strong>{' '}
                   A tool&apos;s efficacy score cannot exceed its research evidence tier. Marketing claims alone cap at 1/5.
                 </p>
                 <p>
-                  <strong className="text-lens-ink">WCAG 2.1 AA</strong> &mdash;
-                  DOJ-mandated accessibility standard for public schools (April 2026 deadline).
+                  <strong className="text-lens-ink">WCAG 2.1 AA:</strong>{' '}
+                  The DOJ-mandated accessibility standard for public schools, with an April 2026 compliance deadline.
                 </p>
                 <p>
-                  <strong className="text-lens-ink">FERPA / COPPA</strong> &mdash;
-                  Federal privacy standards for student data protection.
+                  <strong className="text-lens-ink">FERPA / COPPA:</strong>{' '}
+                  Federal privacy standards that protect student data. Non-negotiable for any tool used in K-12 settings.
                 </p>
               </div>
             </div>
@@ -641,10 +697,11 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 py-8">
           <div className="flex flex-wrap items-start justify-between gap-8">
             <div>
-              <div className="font-display text-3xl mb-2">6D LENS</div>
+              <div className="font-display text-3xl mb-2">THE 6D LENS</div>
               <p className="text-sm text-gray-400 max-w-sm leading-relaxed">
-                The 6 Dimensions of Intention &amp; Integrity in Learning Design.
-                Built by educators, for educators. Grounded in research, not hype.
+                Evaluating educational technology for instructional design, pedagogy, equity,
+                and student safety. Built by educators, for educators. Grounded in research
+                that supports meaningful student outcomes.
               </p>
             </div>
             <div className="text-right">
@@ -654,17 +711,22 @@ export default function Home() {
               <p className="text-sm text-gray-400">
                 National Board Certified Exceptional Needs Specialist
               </p>
-              <p className="text-xs text-gray-500 mt-3">
-                AI-generated evaluations &mdash; always verify with primary sources
-              </p>
             </div>
           </div>
-          <div className="mt-8 pt-4 border-t border-gray-700 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-6 pt-4 border-t border-gray-700">
+            <p className="text-xs text-gray-500 leading-relaxed max-w-3xl">
+              <strong className="text-gray-400">Disclaimer:</strong> Evaluations generated by The 6D Lens
+              are intended as a starting point for professional decision-making. They should not replace
+              independent research, direct review of vendor documentation, or district-level vetting processes.
+              Educators are encouraged to verify all findings against primary sources before making adoption decisions.
+            </p>
+          </div>
+          <div className="mt-4 pt-4 border-t border-gray-700 flex flex-wrap items-center justify-between gap-4">
             <p className="text-xs text-gray-500">
-              &ldquo;No junk. Just tools that put learning first.&rdquo;
+              The Pedagogical Vault
             </p>
             <p className="text-xs text-gray-500">
-              &copy; {new Date().getFullYear()} The Pedagogical Vault
+              &copy; {new Date().getFullYear()} Amy Henderson. All rights reserved.
             </p>
           </div>
         </div>

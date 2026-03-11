@@ -102,7 +102,7 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
   const handleShare = useCallback(async () => {
     const classification = getClassificationLabel(result.classification);
     const text = [
-      `${result.toolName} \u2014 6D Lens Evaluation Report`,
+      `${result.toolName}: The 6D Lens Evaluation Report`,
       `Score: ${result.overallScore}/100 (${classification})`,
       ``,
       `${result.bottomLine}`,
@@ -113,13 +113,14 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
       `Areas for improvement:`,
       ...result.improvements.map(i => `  - ${i}`),
       ``,
-      `Powered by the 6D Framework \u2014 The Pedagogical Vault`,
+      `Evaluated by The 6D Lens | The Pedagogical Vault`,
+      `Note: This evaluation is a starting point. Verify findings with primary sources.`,
     ].join('\n');
 
     // Try native share first, fall back to clipboard
     if (navigator.share) {
       try {
-        await navigator.share({ title: `${result.toolName} \u2014 6D Lens Report`, text });
+        await navigator.share({ title: `${result.toolName}: The 6D Lens Report`, text });
         return;
       } catch {
         // User cancelled or share failed, fall through to clipboard
@@ -278,7 +279,7 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
             <div className="flex items-start justify-between flex-wrap gap-6">
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-semibold uppercase tracking-widest text-lens-grey mb-2">
-                  6D LENS EVALUATION REPORT
+                  THE 6D LENS EVALUATION REPORT
                 </div>
                 <h1 className="font-display text-5xl md:text-7xl leading-none mb-3">
                   {result.toolName.toUpperCase()}
@@ -332,7 +333,7 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
             <p className="text-sm leading-relaxed max-w-3xl">{classificationDesc}</p>
             {result.qualifiesForVault && (
               <p className="text-lens-red font-semibold text-sm mt-2 uppercase tracking-wider">
-                Vault Qualified &mdash; Passes all gatekeepers with score &ge; 70
+                Vault Qualified: Passes all gatekeepers with score &ge; 70
               </p>
             )}
           </div>
@@ -361,7 +362,7 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
                         isNA ? 'gk-na' : isPassing ? 'gk-pass' : 'gk-fail'
                       }`}
                     >
-                      {isNA ? 'N/A' : isPassing ? 'PASS' : 'FAIL'} &mdash; {meta.name}
+                      {isNA ? 'N/A' : isPassing ? 'PASS' : 'FAIL'}: {meta.name}
                     </div>
                     <div className="px-4 py-3">
                       <p className="text-xs text-lens-grey mb-2">{meta.description}</p>
@@ -438,8 +439,7 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
                       <div className="font-display text-4xl flex-shrink-0 w-16 text-right">
                         {score}<span className="text-lg text-lens-grey">/5</span>
                       </div>
-                      <div className="no-print text-lens-grey flex-shrink-0 transition-transform duration-200"
-                        style={{ transform: isExpanded ? 'rotate(0deg)' : 'rotate(0deg)' }}>
+                      <div className="no-print text-lens-grey flex-shrink-0">
                         {isExpanded ? '\u2212' : '+'}
                       </div>
                     </button>
@@ -624,7 +624,11 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
                 Built on the 6 Dimensions of Intention &amp; Integrity in Learning Design.
                 Grounded in Hattie&apos;s Visible Learning, Marzano&apos;s High-Yield Strategies,
                 UDL, TPACK, SAMR, and ESSA Evidence Tiers.
-                AI-generated evaluation &mdash; always verify claims with primary sources.
+              </p>
+              <p className="text-xs mt-2 italic">
+                This evaluation is intended as a starting point for professional decision-making.
+                Educators should verify findings against primary sources and conduct independent research
+                before making adoption decisions.
               </p>
             </div>
           </div>
@@ -634,13 +638,13 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
         <div className="bg-lens-ink text-white">
           <div className="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between flex-wrap gap-4">
             <div>
-              <span className="font-display text-2xl">6D LENS</span>
+              <span className="font-display text-2xl">THE 6D LENS</span>
               <span className="text-lens-grey text-sm ml-3">
-                The 6 Dimensions of Intention &amp; Integrity in Learning Design
+                Evaluating EdTech for Instructional Design &amp; Pedagogy
               </span>
             </div>
             <div className="text-sm text-lens-grey">
-              &ldquo;No junk. Just tools that put learning first.&rdquo;
+              The Pedagogical Vault
             </div>
           </div>
         </div>
