@@ -152,43 +152,55 @@ export default function Report({ result, onNewEvaluation }: ReportProps) {
     setDownloading(true);
 
     try {
-      // Expand all dimensions for PDF capture
       setExpandedDimensions(new Set(Object.keys(DIMENSION_META)));
+      await new Promise(resolve => setTimeout(resolve, 600));
 
-      // Wait for render
-      await new Promise(resolve => setTimeout(resolve, 400));
+      // Hide UI-only elements before capture
+      const noPrintEls = reportRef.current.querySelectorAll('.no-print');
+      noPrintEls.forEach(el => ((el as HTMLElement).style.display = 'none'));
 
       const html2canvas = (await import('html2canvas')).default;
       const { jsPDF } = await import('jspdf');
 
-      const element = reportRef.current;
-      const canvas = await html2canvas(element, {
+      const canvas = await html2canvas(reportRef.current, {
         scale: 2,
         useCORS: true,
         backgroundColor: '#F0EDEB',
         logging: false,
-        windowWidth: 1200, // Consistent render width
+        windowWidth: 1200,
       });
 
-      const imgData = canvas.toDataURL('image/png');
+      noPrintEls.forEach(el => ((el as HTMLElement).style.display = ''));
+
+      const margin = 10; // mm
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = pdfWidth;
-      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const contentWidth = pageWidth - margin * 2;
+      const contentHeight = pageHeight - margin * 2;
 
-      // Handle multi-page
-      let heightLeft = imgHeight;
-      let position = 0;
+      // How many source pixels fit on one page of content
+      const mmPerPx = contentWidth / canvas.width;
+      const pxPerPage = Math.floor(contentHeight / mmPerPx);
+      const totalPages = Math.ceil(canvas.height / pxPerPage);
 
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pdfHeight;
+      for (let page = 0; page < totalPages; page++) {
+        if (page > 0) pdf.addPage();
 
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pdfHeight;
+        const srcY = page * pxPerPage;
+        const srcH = Math.min(pxPerPage, canvas.height - srcY);
+
+        const slice = document.createElement('canvas');
+        slice.width = canvas.width;
+        slice.height = srcH;
+        const ctx = slice.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+        }
+
+        const sliceImg = slice.toDataURL('image/png');
+        const sliceHeight = srcH * mmPerPx;
+        pdf.addImage(sliceImg, 'PNG', margin, margin, contentWidth, sliceHeight);
       }
 
       pdf.save(`${result.slug || 'evaluation'}-6d-report.pdf`);
